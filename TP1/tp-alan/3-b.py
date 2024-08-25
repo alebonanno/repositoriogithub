@@ -21,7 +21,7 @@ def pedir_numero():
 def fibonacci(numero):
   
     if numero < 0:
-         return print("El número debe ser un entero no negativo.")
+         return print("El número debe ser un entero positivo.")
     
 
     resultado_fibonacci = []

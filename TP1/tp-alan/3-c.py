@@ -14,14 +14,17 @@
 
 
 def procesar_sentencias(a, b, c):
+  
+    resultado_1 = a or b                   
+    resultado_2 = b and c                  
+    resultado_3 = a and b or c               
+    resultado_4 = a or not b                 
     
-    return a or b, b and c, a and b or c, a or not b
-
+    return resultado_1, resultado_2, resultado_3, resultado_4
 
 a = True
 b = False
 c = True
 
-
 resultados = procesar_sentencias(a, b, c)
-print(resultados)  
+print(resultados)
