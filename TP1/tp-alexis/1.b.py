@@ -6,3 +6,4 @@ def es_abc(palabra):
       return False
   return True
 
+print (es_abc('agbc'))

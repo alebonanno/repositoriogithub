@@ -6,4 +6,4 @@ def palabra_no_tiene_letras(palabra, letras_prohibidas):
       return False
   return True
 
-print(palabra_no_tiene_letras("hola", "u"))
+print(palabra_no_tiene_letras("hola", "a"))
