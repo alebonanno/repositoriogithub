@@ -1,4 +1,4 @@
-'''2. Sección B: Introducción a la Programación Orientada a 
+'''2. Sección B: Introducción a la Programación Orientada a
 Objetos
 A continuación, se presenta el código de un programa que, 
 ante la edad ingresada por el usuario,
@@ -22,7 +22,6 @@ e. Todas las funciones sean transportadas a un archivo
 auxiliar de funciones
 llamado funciones.py, y este sea importado desde el programa 
 principal.
-
 '''
 import time
 from calendar import isleap

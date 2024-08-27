@@ -19,11 +19,31 @@ Para la búsqueda de caracteres de cierto tipo (mayúsculas, acentos, espacios y
 """
 import re
 
-patron = re.compile(r'[$&+,:;=?@#|<>.^*()%!-]')
+patronLongitud = re.compile(r'^.{6,20}$')
+patroNumero = re.compile(r'.*\d+.*')
+patronMayusculas = re.compile(r'^(.*[A-Z].*){2,}$')
+patronEspacios = re.compile(r'^\S*$')
+patronCaracteresEspeciales = re.compile(r'.*[$&+,:;=?@#|<>.^*()%!-].*')
 
 def contrasena_valida(contrasena):
-  es_valida = bool(patron.match(contrasena))
-  print(f"{contrasena} es válida: {es_valida}")
+  if not patronLongitud.match(contrasena):
+    print("La contraseña tiene que tener entre 6 a 20 caracteres")
+    return False;
+  if not patroNumero.match(contrasena):
+    print("La contraseña debe tener al menos un número")
+    return False;
+  if not patronMayusculas.match(contrasena):
+    print("La contraseña debe tener al menos dos mayúsculas")
+    return False;
+  if not patronEspacios.match(contrasena):
+    print("La contraseña no puede contener espacios")
+    return False;
+  if not patronCaracteresEspeciales.match(contrasena):
+    print("La contraseña debe tener al menos un caractér especial")
+    return False;
+
+  print(f"{contrasena} es válida")
+  return True;
 
 contrasena_valida("abc.123")
 contrasena_valida("Abc.123")
