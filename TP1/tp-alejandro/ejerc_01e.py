@@ -10,7 +10,7 @@ Entonces, la salida del programa debería ser:
 1,9,25,49,81"""
 entrada = input("Ingrese una lista de números separados por comas: ")
 #entrada_string = '1,2,3,4,5,6,7,8,9'
-entrada_sin_espacios = entrada_string.replace(" ", "")
+entrada_sin_espacios = entrada.replace(" ", "")
 lista_strings = entrada_sin_espacios.split(",")
 lista_numeros = [int(num) for num in lista_strings]
 
