@@ -14,12 +14,13 @@ class MaestroPizzero:
   def tomarPedido(self, var):
     nuevaPizza = Pizza(var)
     self.__pizzasPorCocinar.append(nuevaPizza)
+    print(f"Se tomo el pedido de la pizza {var}")
 
   def cocinar(self):
     if len(self.__pizzasPorCocinar) > 0:
       self.__pizzasPorEntregar.extend(self.__pizzasPorCocinar)
+      print(f"El maestro pizzero cocino {len(self.__pizzasPorCocinar)} pizza/s")
       self.__pizzasPorCocinar.clear()
-      print("Todas las pizzas fueron cocinadas")
     else:
       print("No quedan pizzas por cocinar")
 
@@ -27,7 +28,6 @@ class MaestroPizzero:
     if len(self.__pizzasPorEntregar) > 0:
       pizzas = self.__pizzasPorEntregar[:2]
       self.__pizzasPorEntregar = self.__pizzasPorEntregar[2:]
-      print("Entregando pizzas")
       return pizzas
     else:
       print("No quedan pizzas por entregar")
