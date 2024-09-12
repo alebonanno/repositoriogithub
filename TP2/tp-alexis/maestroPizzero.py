@@ -12,15 +12,19 @@ class MaestroPizzero:
     self.__nombre = nom
 
   def tomarPedido(self, var):
-    nuevaPizza = Pizza(var)
-    self.__pizzasPorCocinar.append(nuevaPizza)
-    print(f"Se tomo el pedido de la pizza {var}")
+    if len(var) > 0:
+      nuevaPizza = Pizza(var)
+      self.__pizzasPorCocinar.append(nuevaPizza)
+      print(f"Se tomo el pedido de la pizza {var}")
+    else:
+      print("Nombre de pizza incorrecto")
 
   def cocinar(self):
     if len(self.__pizzasPorCocinar) > 0:
       self.__pizzasPorEntregar.extend(self.__pizzasPorCocinar)
-      print(f"El maestro pizzero cocino {len(self.__pizzasPorCocinar)} pizza/s")
+      pizzasCocinadas = len(self.__pizzasPorCocinar)
       self.__pizzasPorCocinar.clear()
+      print(f"El maestro pizzero cocino {pizzasCocinadas} pizza{"s" if pizzasCocinadas > 1 else ""}")
     else:
       print("No quedan pizzas por cocinar")
 

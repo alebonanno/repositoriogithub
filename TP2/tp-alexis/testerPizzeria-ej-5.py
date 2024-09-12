@@ -21,12 +21,11 @@ class TesterPizzeria:
           if mozo1.obtenerEstadoLibre():
             mozo1.tomarPizzas(pizzasPorEntregar)
             mozo1.servirPizzas()
-            pizzasPorEntregar = maestroPizzero.entregar()
+            pizzasPorEntregar.extend(maestroPizzero.entregar())
           if mozo2.obtenerEstadoLibre():
             mozo2.tomarPizzas(pizzasPorEntregar)
             mozo2.servirPizzas()
-            pizzasPorEntregar = maestroPizzero.entregar()        
-
+            pizzasPorEntregar.extend(maestroPizzero.entregar())
 
 if __name__ == '__main__':
   testerPizzeria = TesterPizzeria()
