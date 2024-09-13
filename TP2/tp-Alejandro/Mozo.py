@@ -11,6 +11,7 @@ class Mozo():
     def establecerNombre(self, nom): #: string)
         self.__nombre = nom
     def tomarPizzas(self, pizzas): #Pizza[])          
+        if not len(self.__pizzas): print('--Mozo: No hay pizzas para tomar')
         self.__pizzas.extend(pizzas)
     
         #Requiere pizzas ligado
@@ -30,6 +31,14 @@ class Mozo():
     def obtenerEstadoLibre(self): #boolean
         #return not bool(self.__pizzas)
         return True if len(self.__pizzas) < 2 else False
-    
+    def manosLibres(self):
+        #print(self.__pizzas)
+        if len(self.__pizzas) == 1:
+            return 1
+        elif self.obtenerEstadoLibre():
+            return 2
+        else: return 0
     def obtenerNombrePizzasPorEntregar(self):
         return [pizza.obtenerVariedad() for pizza in self.__pizzas]
+    
+    

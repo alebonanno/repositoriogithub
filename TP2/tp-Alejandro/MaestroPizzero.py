@@ -29,13 +29,17 @@ class MaestroPizzero():
             print(f'Pizzas para entregar: {self.obtenerNombrePizzasPorEntregar()}')
             
         else: print('    No hay pizzas pedidas para cocinar')
-    def entregar(self): # Pizza[]
+        
+    def entregar(self,num): # Pizza[]
         entregando = []
-        if len(self.__pizzasPorEntregar) > 0:
-            entregando.extend(self.__pizzasPorEntregar[:1])
-            del self.__pizzasPorEntregar[0]
-            entrega = [pizza.obtenerVariedad() for pizza in entregando]
-            print(f'      Tomando: {entrega}')
+        if isinstance(num, int): #verifica que num pueda convertirse a entero
+            print(f'Cantidad de pizzas para entregar: {len(self.__pizzasPorEntregar)}') #BORRAR
+            for i in range(int(num)):
+                if len(self.__pizzasPorEntregar): #Verifica que tenga pizzas para entregar
+                    entregando.extend(self.__pizzasPorEntregar[:1])
+                    del self.__pizzasPorEntregar[0]
+                    entrega = [pizza.obtenerVariedad() for pizza in entregando]
+                    print(f'      Tomando: {entrega}')
         return entregando
     #<<Consultas>>
     def obtenerNombre(self): #string
