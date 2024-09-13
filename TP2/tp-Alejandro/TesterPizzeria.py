@@ -1,11 +1,13 @@
 from Pizza import *
 from MaestroPizzero import *
-from Mozo import *               
+from Mozo import *         
+from Ventana1 import *      
 import os
 import time
 
 class TesterPizzeria: 
   def main(self):
+     ventana = Ventana1()
      def ejercicio4():            
           print('\nCreando mozo 1')
           mozo1 = Mozo("Alfredo")
@@ -46,7 +48,7 @@ class TesterPizzeria:
                print('Elija una opción: ')
                print(f'Maestro Pizzero: {maestroPizzero.obtenerNombre()}           Mozo1: {mozo1.obtenerNombre()}            Mozo2: {mozo2.obtenerNombre()}        0] SALIR')
                print('1] Tomar pedido: Muzza           10] Tomar pizzas        20] Tomar pizzas      33] Ejercicio 4 del Tp2')
-               print('2] Tomar pedido: Especial        11] Servir pizzas       21] Servir pizzas')      
+               print('2] Tomar pedido: Especial        11] Servir pizzas       21] Servir pizzas     34] GUI')      
                print('3] Tomar pedido: Palmitos        12] Pizzas para servir  22] Pizzas para servir')
                print('4] Tomar pedido: Rúcula y Jamón')
                print('5] Cocinar')
@@ -70,12 +72,10 @@ class TesterPizzeria:
                          case 5:
                               maestroPizzero.cocinar()
                          case 6 | 10: 
-                              while mozo1.obtenerEstadoLibre() and len(maestroPizzero.obtenerPizzasPorEntregar()): 
-                                   mozo1.tomarPizzas(maestroPizzero.entregar())
+                              mozo1.tomarPizzas(maestroPizzero.entregar(mozo1.manosLibres()))
                               print(f'El mozo1 {mozo1.obtenerNombre()} tomo las pizzas: {mozo1.obtenerNombrePizzasPorEntregar()}')
                          case 7 | 20:
-                              while mozo2.obtenerEstadoLibre() and len(maestroPizzero.obtenerPizzasPorEntregar()): 
-                                   mozo2.tomarPizzas(maestroPizzero.entregar())
+                              mozo2.tomarPizzas(maestroPizzero.entregar(mozo2.manosLibres()))
                               print(f'El mozo2 {mozo2.obtenerNombre()} tomo las pizzas: {mozo2.obtenerNombrePizzasPorEntregar()}')
                          case 8:
                               print(maestroPizzero.obtenerNombrePizzasPorCocinar())
@@ -91,6 +91,8 @@ class TesterPizzeria:
                               print(f'{mozo2.obtenerNombre()} tiene {mozo2.obtenerNombrePizzasPorEntregar()}')
                          case 33:
                               ejercicio4()
+                         case 34:
+                              ventana.main()
                          case _ :
                               print('OPCION NO VALIDA')
                     time.sleep(2)
@@ -115,8 +117,7 @@ class TesterPizzeria:
      maestroPizzero.tomarPedido("Especial")              #Maestro pizzero toma pedido de Especial
      maestroPizzero.tomarPedido("Rúcula con Jamón")      #Maestro pizzero toma pedido de Rucúla y Jamón
      maestroPizzero.cocinar()                            #Maestro pizzero cocina las pizzas 
-     while mozo1.obtenerEstadoLibre():                  
-          mozo1.tomarPizzas(maestroPizzero.entregar())
+     mozo1.tomarPizzas(maestroPizzero.entregar(mozo1.manosLibres()))
      print(f'El mozo1 {mozo1.obtenerNombre()} tomo las pizzas? {not mozo1.obtenerEstadoLibre()} {mozo1.obtenerNombrePizzasPorEntregar()}')
      print('Mozo sirviendo las pizzas', end='')
      mozo1.servirPizzas()
@@ -127,10 +128,10 @@ class TesterPizzeria:
      #print(maestroPizzero.obtenerNombrePizzasPorEntregar())
      maestroPizzero.cocinar()
      #print(maestroPizzero.obtenerNombrePizzasPorEntregar())
-     while mozo2.obtenerEstadoLibre():                  
-          mozo2.tomarPizzas(maestroPizzero.entregar())
+     mozo2.tomarPizzas(maestroPizzero.entregar(mozo2.manosLibres()))
      print(f'El mozo2 {mozo2.obtenerNombre()} tomo las pizzas? {not mozo2.obtenerEstadoLibre()}')
      print(f'El mozo2 {mozo2.obtenerNombre()} tiene las pizzas: {mozo2.obtenerNombrePizzasPorEntregar()}')
+     mozo2.servirPizzas()
      
      menu()  
 if __name__ == '__main__':
