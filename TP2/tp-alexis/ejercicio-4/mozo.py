@@ -11,11 +11,10 @@ class Mozo:
     if len(self.__pizzas) == 1 or len(pizzas) == 1:
       self.__pizzas.append(pizzas.pop(0))
       print(f"El mozo {self.__nombre} tomo 1 pizza para entregar.")
-    elif len(pizzas) + len(self.__pizzas) <= 2:
-      self.__pizzas.extend(pizzas)
-      pizzasTomadas = len(pizzas)
-      pizzas.clear()
-      print(f"El mozo {self.__nombre} tomo {pizzasTomadas} pizzas para entregar.")
+    elif len(self.__pizzas) == 0:
+      self.__pizzas.extend(pizzas[:2]) 
+      del pizzas[:2]
+      print(f"El mozo {self.__nombre} tomó 2 pizzas para entregar.")
     else:
       print("El mozo solo puede llevar como máximo 2 pizzas")
 

@@ -1,5 +1,4 @@
 class Pizza:
-  #constructor
   def __init__(self, var):
     self.__var = var
 

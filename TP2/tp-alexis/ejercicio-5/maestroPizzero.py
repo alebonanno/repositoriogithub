@@ -1,7 +1,6 @@
 from pizza import Pizza
 
 class MaestroPizzero:
-  #constructor
   def __init__(self, nombre):
     self.__nombre = nombre
     self.__pizzasPorCocinar = []
