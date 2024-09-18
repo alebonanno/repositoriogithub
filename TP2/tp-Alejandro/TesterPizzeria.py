@@ -20,24 +20,8 @@ class TesterPizzeria:
                + str(" SI HACEN REFERENCIA AL MISMO OBJETO" 
                     if (id(mozo1)) == (id(mozo2)) else " NO HACEN REFERENCIA AL MISMO OBJETO"))
           print('ii. ¿Son objetos equivalentes? Explique que significa que dos objetos lo sean. ')
-          print('     En este caso no son equivalentes pero podrian serlo')
-          print('     La equivalencia de objetos depende de cómo se define el método')
-          print('     __eq__ en la clase Mozo. Si __eq__ está implementado para comparar ')
-          print('     los atributos relevantes (por ejemplo, el nombre), entonces mozo1 ')
-          print('     y mozo2 podrían considerarse equivalentes si tienen los mismos valores ')
-          print('     para esos atributos.')
-          print('     class Mozo:')
-          print('     def __init__(self, nombre):')
-          print('     self.nombre = nombre\n')
-
-          print('     def __eq__(self, other):')
-          print('        return self.nombre == other.nombre\n')
-
-          print('     mozo1 = Mozo("Alfredo")')
-          print('     mozo2 = Mozo("Alfredo")')
-          print('     print(mozo1 == mozo2)  # Esto devolverá True si __eq__ está definido como arriba\n')
-
-          print('     En este caso, mozo1 y mozo2 serían considerados equivalentes porque tienen el mismo nombre.')
+          print('     Podemos decir que son equivalentes ya que por definición si dos objectos tienen el mismo estado interno decimos que son equivalente, en este caso tienen el mismo estado interno, ambos mozos tienen el mismo nombre y la lista de pizzas esta vacía')
+          
 
           print('iii. ¿Los objetos ligados a mozo1 y mozo2 comparten la misma posición de memoria? \n' + 
                '      No comparten la misma posición de memoria')
