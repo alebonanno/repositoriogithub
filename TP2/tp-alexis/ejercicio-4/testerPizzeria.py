@@ -30,8 +30,14 @@ class TesterPizzeria:
       print()
       
       print("iii. ¿Los objetos ligados a mozo1 y mozo2 comparten la misma posición de memoria?")
-      print("ID en memoria mozo1: " + str(id(mozo1)))
-      print("ID en memoria mozo2: " + str(id(mozo2)))
+      idMozo1 = id(mozo1)
+      idMozo2 = id(mozo2)
+      print("ID en memoria mozo1: " + str(idMozo1))
+      print("ID en memoria mozo2: " + str(idMozo2))
+      if idMozo1 == idMozo2:
+        print("mozo1 y mozo2 tienen misma dirección de memoria")
+      else:
+        print("mozo1 y mozo2 tienen distinta dirección de memoria")
       print("Utilizando la función ""id(object)"" obtenemos la dirección de memoria, en cada mozo vemos tienen diferente dirección memoria")
       print()
         
