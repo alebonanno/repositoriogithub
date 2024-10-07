@@ -1,0 +1,32 @@
+6. Indique si las siguientes sentencias son Verdaderas o Falsas: 
+a. La clase Mozo y la clase MaestroPizzero están asociadas. 
+ No estan asociadas porque ninguna tiene un atributo de instancia de la otra clase.
+b. Existe una relación de dependencia entre las clases Mozo y MaestroPizzero. 
+ No, no existe una relación de dependencia porque no hay 
+ ningun servicio de una clase que declare una variable local, 
+ o que recibe como un parámetro o que retorne como resultado 
+ un objeto de la otra clase
+c. La clase Orden es proveedora de la clase MaestroPizzero.
+  Si, ya que la clase MaestroPizzero usa a la clase Orden 
+d. La clase MaestroPizzero es proveedora de la clase Pizza. 
+  No, La clase MaestroPizzero no es proveedora de la clase Pizza
+  ya que esta última no utiliza ningun servicio de la clase MaestroPizzero 
+  y ninguna instancia de la clase MaestroPizzero 
+e. La clase MaestroPizzero es cliente de la clase Pizza. 
+  Si, ya que la clase MaestroPizzero usa métodos de la clase Cliente 
+f. La clase Pizza y PizzaVariedad están asociadas. 
+  Si estan asociadas porque la clase Pizza tiene como atributo de instancia a la clase PizzaVariedad.
+g. Existe una relación de dependencia entre las clases 
+PizzaVariedad y Pizza. 
+  Si existe una relación de dependencia porque hay servicios 
+  de la clase Pizza que declara una variable local, 
+ o que recibe como un parámetro un objeto de la otra clase
+h. La clase Mozo y Pizza están asociadas. 
+  Si estan asociadas porque la clase Mozzo tiene como atributo de instancia a la clase Pizza.
+
+i. Existe una relación de dependencia entre las clases
+ Orden y PizzaVariedad.
+ Sí, existe una relación de dependencia entre las clases Orden 
+ y PizzaVariedad. La clase Orden depende indirectamente de la 
+ clase PizzaVariedad a través de la clase Pizza.
+ La clase Orden depende de PizzaVariedad porque utiliza su método obtenerPrecio a través de Pizza.
