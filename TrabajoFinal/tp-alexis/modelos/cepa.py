@@ -1,7 +1,9 @@
 import json
 
+from modelos.entidadvineria import EntidadVineria
 
-class Cepa:
+
+class Cepa(EntidadVineria):
 
     def __repr__(self):
         return json.dumps({"nombre": self.obtenerNombre()})
@@ -30,3 +32,15 @@ class Cepa:
             vinos,
         )
         return list(vinosMapa)
+
+    def obtenerVinos(self):
+        from vinoteca import Vinoteca
+
+        vinos = Vinoteca.obtenerVinos()
+        vinosCepa = []
+        for vino in vinos:
+            for cepa in vino.obtenerCepas():
+                if cepa.obtenerId() == self.obtenerId():
+                    vinosCepa.append(vino)
+                    break
+        return vinosCepa
