@@ -1,0 +1,19 @@
+Este archivo JSON es un diccionario que contiene tres listas: bodegas, cepas, y vinos. Cada una de estas listas contiene diccionarios que representan diferentes entidades. Aquí te explico cada sección:
+
+    bodegas:
+
+        Es una lista de diccionarios, donde cada diccionario representa una bodega.
+
+        Cada bodega tiene un id y un nombre.
+
+    cepas:
+
+        Es una lista de diccionarios, donde cada diccionario representa una cepa de uva.
+
+        Cada cepa tiene un id y un nombre.
+
+    vinos:
+
+        Es una lista de diccionarios, donde cada diccionario representa un vino.
+
+        Cada vino tiene un id, un nombre, un bodega (referenciando el id de una bodega), una lista de cepas (referenciando los ids de las cepas), y una lista de partidas.
