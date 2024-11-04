@@ -1,6 +1,7 @@
 import json
 
 from modelos.entidadvineria import EntidadVineria
+import vinoteca
 
 
 class Bodega(EntidadVineria):
@@ -35,17 +36,13 @@ class Bodega(EntidadVineria):
         return list(vinosMapa)
 
     def obtenerVinos(self):
-        from vinoteca import Vinoteca
-
-        vinos = Vinoteca.obtenerVinos()
+        vinos = vinoteca.Vinoteca.obtenerVinos()
         vinosBodega = list(
             filter(lambda v: (v.obtenerBodega().obtenerId() == self.obtenerId()), vinos)
         )
         return vinosBodega
 
     def obtenerCepas(self):
-        from vinoteca import Vinoteca
-
         vinosBodega = self.obtenerVinos()
         cepasIds = []
         for vino in vinosBodega:
@@ -57,6 +54,6 @@ class Bodega(EntidadVineria):
 
         cepas = []
         for cepaId in cepasIds:
-            cepas.append(Vinoteca.buscarCepa(cepaId))
+            cepas.append(vinoteca.Vinoteca.buscarCepa(cepaId))
 
         return cepas

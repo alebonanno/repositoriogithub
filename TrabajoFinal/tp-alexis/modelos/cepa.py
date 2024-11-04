@@ -1,6 +1,7 @@
 import json
 
 from modelos.entidadvineria import EntidadVineria
+import vinoteca
 
 
 class Cepa(EntidadVineria):
@@ -34,9 +35,7 @@ class Cepa(EntidadVineria):
         return list(vinosMapa)
 
     def obtenerVinos(self):
-        from vinoteca import Vinoteca
-
-        vinos = Vinoteca.obtenerVinos()
+        vinos = vinoteca.Vinoteca.obtenerVinos()
         vinosCepa = []
         for vino in vinos:
             for cepa in vino.obtenerCepas():

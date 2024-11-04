@@ -1,5 +1,7 @@
 import json
+
 from modelos.entidadvineria import EntidadVineria
+import vinoteca
 
 
 class Vino(EntidadVineria):
@@ -14,16 +16,12 @@ class Vino(EntidadVineria):
         return self.__partidas
 
     def obtenerBodega(self):
-        from vinoteca import Vinoteca
-
-        return Vinoteca.buscarBodega(self.__bodega)
+        return vinoteca.Vinoteca.buscarBodega(self.__bodega)
 
     def obtenerCepas(self):
-        from vinoteca import Vinoteca
-
         cepasDelVino = []
         for cepaId in self.__cepas:
-            cepasDelVino.append(Vinoteca.buscarCepa(cepaId))
+            cepasDelVino.append(vinoteca.Vinoteca.buscarCepa(cepaId))
         return cepasDelVino
 
     def __repr__(self):
