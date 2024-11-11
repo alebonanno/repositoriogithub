@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinoteca Virtual</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 5vw;
+            flex: 1;
+            background: url('Mendoza.jpg') no-repeat center center; 
+            background-size: cover;
+            opacity: 0.8;
+        }
+
+        .menu {
+            width: 40vw;
+            padding: 10px;
+            border-right: 5vw solid transparent;
+        }
+
+        .content {
+            width: 45vw;
+            height: 80vh;
+            border: 1px solid #ccc;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+
+        iframe.content {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .menu p {
+            color: white;
+            /*background-color: #f1f1f1;
+            opacity: 0.5;*/
+        }
+        .buttons {
+            margin-bottom: 10px;
+            max-height: 10vh;
+            display: flex;
+            justify-content: flex-start;
+            background-color: #e9e8e8;
+        }
+
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #b95f5f;
+            border-radius: 10px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover  {
+            background-color: #502828;
+        }
+
+        .button.active {
+            background-color: #220404 !important;
+        }
+
+
+        footer {
+            text-align: center;
+            padding: 8px;
+            max-height: 2vh;
+            background-color: #f1f1f1;
+            border-top: 1px solid #ccc;
+            flex-shrink: 0; 
+            font-size: 80%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="buttons">
+        <button class="button" id="bodegasButton" onclick="mostrarBodegas()">Bodegas</button>
+        <button class="button" id="cepasButton" onclick="mostrarCepas()">Cepas</button>
+        <button class="button" id="vinosButton" onclick="mostrarVinos()">Vinos</button>
+    </div>
+    <div class="container">
+        <div class="menu" id="menu"></div>
+        <div class="content">
+            <iframe id="content" class="content"></iframe>
+        </div>
+    </div> 
+    <footer> 
+        Programación II 2024 - Grupo 22 - Alejandro Bonanno, Alexis Checura, Alan Magliolini, Tamara Rodriguez, Jonatan Soto. 
+    </footer>
+    
+    <script>
+        const bodegasId = [
+            "a0117be3-2ea6-8db1-8901-1be2adf61c29",
+            "a0900e61-0f72-67ae-7e9d-4218da29b7d8",
+            "7a023493-c091-b352-40c2-d6c9da450d1e",
+            "ffaa2acb-b07e-7111-f02d-6ce9c72fbd62",
+            "aa6af203-2f63-4fa8-40ff-3f77af062df8",
+            "cd32d0ab-1da5-7d5e-caff-f90bbee6fe7f",
+            "e45cf923-3843-91a3-90df-879c8269c5fc"
+        ];
+        
+        const bodegasNombre = [
+            "La Iride",
+            "Casa La Primavera Bodegas y Viñedos",
+            "Bodega Sottano",
+            "Escorihuela Gascon",
+            "Escandalosos Wine",
+            "Rutini Wines",
+            "Proyecto Malbec"
+        ];
+
+        const cepasId = [
+            "33ccaa9d-4710-9942-002d-1b5cb9912e5d",
+            "b065c64b-fc96-cf13-2d52-d7a6ba373c68",
+            "e076a2c8-b1f5-136e-8319-0ee0b5c02091",
+            "b80905e3-1839-3194-301b-c5fddafc888c"
+        ];
+        
+        const cepasNombre = [
+            "Chardonnay",
+            "Cabernet Suavignon",
+            "Malbec",
+            "Merlot"
+        ]; 
+        const vinosId = [ 
+            "54919dcb-7ada-70ee-db7d-605650ee41f7", 
+            "4823ad54-0a3a-38b8-adf6-795512994a4f", 
+            "0abbab7c-698a-c542-a67c-7b30cc0a759c", 
+            "109f6002-735b-b58a-66e0-94d62e0dc5fd", 
+            "51461f52-89b8-d702-0673-2cc5ac75085c", 
+            "2c28762a-3fc9-a5f6-7d23-fd3fca58d8fd", 
+            "fe8f3645-27c6-4fbe-5113-a4ab40a1834b", 
+            "205db14f-c0c0-a286-0a5e-0daa7a3f37f0", 
+            "c0b72697-1295-b366-0dd7-d473cb35f0cf", 
+            "7b5b066a-1a52-2639-5866-62ac13e3ec5f", 
+            "ea3d6c45-e747-2e86-ddf8-0746cc13f21c", 
+            "2cbd24a5-cba2-a852-4c0f-8f1ba49c81ae" 
+        ]; 
+        const vinosNombre = [ 
+            "La Iride", 
+            "Abducido", 
+            "Danza con Lobos", 
+            "Motociclista", 
+            "Escandalosos", 
+            "Profugo", 
+            "Oveja Black", 
+            "Sin Palabra", 
+            "Sottano", 
+            "Alma Bohemia", 
+            "Familia Gascon", 
+            "Trumpeter" 
+        ]; 
+        const vinosAnios = [ 
+            2023, 
+            2022, 
+            2021, 
+            2020, 
+            2019 
+        ]; 
+
+        function mostrarBodegas() {
+            const menu = document.getElementById('menu');
+            menu.innerHTML = `
+                <p>Seleccione una opción para la búsqueda:</p>
+                <select id="campoBusqueda" onchange="actualizarDatoBusqueda('bodegas')">
+                    <option value="id">Id</option>
+                    <option value="nombre">Nombre</option>
+                </select>
+                <br><br>
+                <select id="datoBusqueda">
+                </select>
+                <br><br>
+                <button class="button" onclick="buscarBodega()">Buscar</button>
+                <button class="button" onclick="verTodasBodegas()">Ver todo</button>
+            `;
+            actualizarDatoBusqueda('bodegas');
+            actualizarBotones('bodegasButton');
+        }
+
+        function mostrarCepas() {
+            const menu = document.getElementById('menu');
+            menu.innerHTML = `
+                <p class="claro">Seleccione una opción para la búsqueda:</p>
+                <select id="campoBusqueda" onchange="actualizarDatoBusqueda('cepas')">
+                    <option value="id">Id</option>
+                    <option value="nombre">Nombre</option>
+                </select>
+                <br><br>
+                <select id="datoBusqueda">
+                </select>
+                <br><br>
+                <button class="button" onclick="buscarCepa()">Buscar</button>
+                <button class="button" onclick="verTodasCepas()">Ver todo</button>
+            `;
+            actualizarDatoBusqueda('cepas');
+            actualizarBotones('cepasButton');
+        }
+        // function mostrarVinos() { 
+        //     const menu = document.getElementById('menu'); 
+        //     menu.innerHTML = ` 
+        //         <p>Seleccione el año:</p> 
+        //         <select id="anioBusqueda"> 
+        //             <option value="">Todos los años</option> 
+        //             ${vinosAnios.map(anio => `<option value="${anio}">${anio}</option>`).join('')} 
+        //         </select> 
+        //         <br><br> 
+        //         <p>Seleccione una opción para la búsqueda:</p> 
+        //         <select id="campoBusqueda" onchange="actualizarDatoBusqueda('vinos')"> 
+        //             <option value="id">Id</option> 
+        //             <option value="nombre">Nombre</option> 
+        //         </select> 
+        //         <br><br> 
+        //         <select id="datoBusqueda"> 
+        //         </select> 
+        //         <br><br> 
+        //         <button class="button" onclick="buscarVino()">Buscar</button> 
+        //         <button class="button" onclick="verTodosVinos()">Ver todo</button> 
+        //     `; 
+        //     actualizarDatoBusqueda('vinos'); 
+        //     actualizarBotones('vinosButton');
+        // }
+
+        function actualizarDatoBusqueda(tipo) {
+            const campoBusqueda = document.getElementById('campoBusqueda').value;
+            const datoBusqueda = document.getElementById('datoBusqueda');
+            datoBusqueda.innerHTML = '';
+
+            let opciones = [];
+            if (tipo === 'bodegas') {
+                if (campoBusqueda === 'id') {
+                    opciones = bodegasId;
+                } else if (campoBusqueda === 'nombre') {
+                    opciones = bodegasNombre;
+                }
+            } else if (tipo === 'cepas') {
+                if (campoBusqueda === 'id') {
+                    opciones = cepasId;
+                } else if (campoBusqueda === 'nombre') {
+                    opciones = cepasNombre;
+                }
+            } else if (tipo === 'vinos') {
+                if (campoBusqueda === 'id') {
+                    opciones = vinosId;
+                } else if (campoBusqueda === 'nombre') {
+                    opciones = vinosNombre;
+                }
+            }
+
+            opciones.forEach(opcion => {
+                const optionElement = document.createElement('option');
+                optionElement.value = opcion;
+                optionElement.textContent = opcion;
+                datoBusqueda.appendChild(optionElement);
+            });
+        }
+
+        function buscarBodega() {
+            const campoBusqueda = document.getElementById('campoBusqueda').value;
+            const datoBusqueda = document.getElementById('datoBusqueda').value;
+            let idBodega = datoBusqueda;
+
+            if (campoBusqueda === 'nombre') {
+                const index = bodegasNombre.indexOf(datoBusqueda);
+                idBodega = bodegasId[index];
+            }
+
+            console.log(`Buscar bodega por ${campoBusqueda}: ${datoBusqueda} -> Id: ${idBodega}`);
+            document.getElementById('content').src = `http://127.0.0.1:5000/api/bodegas/${idBodega}`;
+        }
+
+        function verTodasBodegas() {
+            console.log("Ver todas las bodegas");
+            const bodegasUnicas = [...new Set(bodegasId.map((id, index) => ({
+                id,
+                nombre: bodegasNombre[index]
+            })))];
+            console.log("Listado de bodegas:", bodegasUnicas);
+            document.getElementById('content').src = `http://127.0.0.1:5000/api/bodegas`;
+        }
+
+
+
+
+        function buscarCepa() {
+            const campoBusqueda = document.getElementById('campoBusqueda').value;
+            const datoBusqueda = document.getElementById('datoBusqueda').value;
+            let idCepa = datoBusqueda;
+
+            if (campoBusqueda === 'nombre') {
+                const index = cepasNombre.indexOf(datoBusqueda);
+                idCepa = cepasId[index];
+            }
+
+            console.log(`Buscar cepa por ${campoBusqueda}: ${datoBusqueda} -> Id: ${idCepa}`);
+            document.getElementById('content').src = `http://127.0.0.1:5000/api/cepas/${idCepa}`;
+        }
+        function verTodasCepas() {
+            console.log("Ver todas las cepas");
+            const cepasUnicas = [...new Set(cepasId.map((id, index) => ({
+                id,
+                nombre: cepasNombre[index]
+            })))];
+            console.log("Listado de cepas:", cepasUnicas);
+            document.getElementById('content').src = `http://127.0.0.1:5000/api/cepas?&orden=id&reverso=no`;
+        }
+
+        function mostrarVinos() {
+            const menu = document.getElementById('menu');
+            menu.innerHTML = `
+                <p>Seleccione el año:</p>
+                <select id="anioBusqueda">
+                    <option value="">Todos los años</option>
+                    ${vinosAnios.map(anio => `<option value="${anio}">${anio}</option>`).join('')}
+                </select>
+                <br><br>
+                <p>Seleccione una opción para la búsqueda:</p>
+                <select id="campoBusqueda" onchange="actualizarDatoBusqueda('vinos')">
+                    <option value="id">Id</option>
+                    <option value="nombre">Nombre</option>
+                </select>
+                <br><br>
+                <select id="datoBusqueda">
+                </select>
+                <br><br>
+                <button class="button" onclick="buscarVino()">Buscar</button>
+                <button class="button" onclick="verTodosVinos()">Ver todo</button>
+            `;
+            actualizarDatoBusqueda('vinos');
+            actualizarBotones('vinosButton');
+        }
+
+
+        function buscarVino() {
+            const anioBusqueda = document.getElementById('anioBusqueda').value;
+            const campoBusqueda = document.getElementById('campoBusqueda').value;
+            const datoBusqueda = document.getElementById('datoBusqueda').value;
+            let idVino = datoBusqueda;
+
+            if (campoBusqueda === 'nombre') {
+                const index = vinosNombre.indexOf(datoBusqueda);
+                idVino = vinosId[index];
+            }
+
+            console.log(`Buscar vino por ${campoBusqueda}: ${datoBusqueda} -> Id: ${idVino}`);
+            document.getElementById('content').src = `http://127.0.0.1:5000/api/vinos/${idVino}?anio=${anioBusqueda}&orden=${campoBusqueda}&reverso=no`;
+        }
+        function verTodosVinos() {
+            console.log("Ver todos los vinos");
+            const anioBusqueda = document.getElementById('anioBusqueda').value;
+            const vinosUnicos = [...new Set(vinosId.map((id, index) => ({
+                id,
+                nombre: vinosNombre[index]
+            })))];
+            console.log("Listado de vinos:", vinosUnicos);
+            
+            let url = `http://127.0.0.1:5000/api/vinos`;
+            if (anioBusqueda) {
+                url += `?anio=${anioBusqueda}&orden=id&reverso=no`;
+            }
+            document.getElementById('content').src = url;
+        }
+
+
+
+        function actualizarBotones(buttonId) {
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                if (button.id === buttonId) {
+                    button.classList.add('active');
+                    //button.classList.remove('inactive');
+                } else {
+                    button.classList.remove('active');
+                   // button.classList.add('inactive');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

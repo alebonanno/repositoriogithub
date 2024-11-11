@@ -56,7 +56,7 @@ class Vinoteca:
         #from bodega import Bodega
         try:
             if isinstance(orden, str):
-                lista = Vinoteca.__bodegas
+                lista = Vinoteca.__bodegas.copy()
                 if orden == "id":
                     print(f"Lista de bodegas ordenadas según el campo {orden} en orden {'inverso' if reverso else 'directo'}")
                     return sorted(lista, key=lambda b: b.obtenerId(), reverse=reverso)
@@ -79,7 +79,7 @@ class Vinoteca:
 
     def obtenerCepas(orden=None, reverso=False) -> list['Vino']: #type: ignore
         try:
-            lista = Vinoteca.__cepas
+            lista = Vinoteca.__cepas.copy()
             if isinstance(orden, str):
                 
                 print(f"Lista de cepas ordenadas según el campo {orden} en orden {'inverso' if reverso else 'directo'}")
@@ -136,9 +136,6 @@ class Vinoteca:
                     return sorted(vinos, key=lambda b: b.obtenerNombre(), reverse=reverso)
                 elif orden == "bodega":
                     #print(f"Lista de vinos ordenados según el campo nombre de bodega en orden {'inverso' if reverso else 'directo'}")
-                    # print(vinos[0])
-                    # print(isinstance(vinos[0], Vino))
-                    # print(f" bodega: {vinos[0].obtenerBodega()}")
                     return sorted(vinos, key=lambda b: b.obtenerBodega().obtenerNombre(), reverse=reverso)
                 elif orden == "cepas":
                     #print(f"Lista de vinos ordenados según el campo cantidad de cepas en orden {'inverso' if reverso else 'directo'}")
